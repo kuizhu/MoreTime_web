@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>MoreTime</title>
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/echarts.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/main.css">
+        <script type="text/javascript" src="../js/main.js"></script>
+        
+    </head>
+
+    <body>
+       
+        <!--顶部水平部分-->
+        <div class="topArea">
+            <!--网站logo-->
+            <img class="logoImg" src="../images/logo.png">
+            
+            <!--右侧的用户头像以及设置按钮-->
+            <div class="rightArea">
+                <img class="userImg" id="userImg" src="../images/userImg.jpg" >
+                <div class="dropdown">
+                    <img class="settingIcon"  src="../images/more.png">
+                    <div class="dropdown-content">
+                        <a href="">我的</a>
+                        <a href="">设置</a>
+                        <a href="">登出</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            getParameters("userid")
+            getUserInfo()
+            getEvent(getDefaultStartDate(),formatDate(new Date()))
+        </script>
+         <!--顶部筛选器-->
+         <div class="selectArea">
+             
+            <input class="timeinput" type="file" accept=".csv" id="file"  style="width:180px;">
+            <button class="selectBtn" id="onloadBtn" onclick="uploadFile()">上传</button>
+            <!--
+            <div style="display:flex;width:5px;background-color:dimgray;margin-left: 25px;margin-right: 25px;"></div>
+            开始：<input class="timeinput" type="datetime-local">
+            结束：<input class="timeinput" type="datetime-local">
+            周期：<select class="timeinput" id="peroid" ></select>
+            类型：<select class="timeinput" id="type"></select>
+            <button class="selectBtn">筛选</button>
+            -->
+        </div>                
+
+
+        <!--导航栏以及正文部分-->
+        <div class="downArea">
+            <!--左侧导航栏-->
+            <div class="leftNav">
+                <ul>
+                    <li><a class="left_a" href="#01">整体统计</a></li>
+                    <li><a class="left_a" href="#02">详细记录</a></li>
+                    <li><a class="left_a" href="#03">喜欢的事</a></li>
+                    <li><a class="left_a" href="#04">可用标签</a></li>
+                </ul>
+            </div>
+            <!--右侧图标区域-->
+            <div class="chartsArea">
+                <!--第一类图表，整体统计-->
+                
+                <fieldset id="01">
+                    <legend align="center" >整 体 统 计</legend>
+                    <div class="limit">
+                        开始：<input class="timeinput" type="date" id="start_1">
+                        结束：<input class="timeinput" type="date" id="end_1">
+                        <button class="selectBtn" id="selectBtn_1" onclick="update_1()">确定</button>
+                    </div>
+                    <div class="field">
+                        <div class="chart" id="chart_one"></div>
+                    </div>
+                    <div class="field">
+                        <div class="chart" id="chart_two"></div>
+                    </div>
+                    <div class="limit">
+                        类型：<select class="timeinput" id="type_1" onchange="update_chart_three()"></select>
+                    </div>
+                    <div class="field">
+                        <div class="chart" id="chart_three"></div>
+                    </div>
+                    <div class="field">
+                        <div class="chart" id="chart_four"></div>
+                    </div>
+                </fieldset>
+
+                <!--第二类图表，详细数据-->
+                <fieldset id="02">
+                    <legend align="center">详 细 数 据</legend>
+                    <div class="limit">
+                        开始：<input class="timeinput" type="date" id="start_2">
+                        结束：<input class="timeinput" type="date" id="end_2">
+                        类型：<select class="timeinput" id="type_2" onchange="update_tabel_1()"></select>
+                        <button class="selectBtn" id="selectBtn_2" onclick="update_2()">确定</button>
+                    </div>
+                    <div class="tableArea">
+                    <table class="imagetable" id="table_1">
+                            
+                        <tbody>
+                            <tr>
+                                <th>事件名称</th><th>标签</th><th>开始时间</th><th>结束时间</th><th>持续时间</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="imagetable" id="table_2">
+                        <tbody>
+                            <tr>
+                                <th>事件名称</th><th>标签</th><th>开始时间</th><th>结束时间</th><th>持续时间</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </fieldset>
+
+                <!--第三类图表，喜欢的事-->
+                <fieldset id="03">
+                    <legend align="center">喜 欢 的 事</legend>
+                    <div class="limit">
+                        开始：<input class="timeinput" type="date" id="start_3">
+                        结束：<input class="timeinput" type="date" id="end_3">
+                        <button class="selectBtn" id="selectBtn_3" onclick="update_3()">确定</button>
+                    </div>
+                    <div class="limit">
+                        开始：<input class="timeinput" value="08:00" type="time" id="start_4">
+                        结束：<input class="timeinput" value="10:00" type="time" id="end_4">
+                        <button class="selectBtn" id="selectBtn_4" onclick="update_loveThing_1()">确定</button>
+                    </div>
+                    <div class="field">
+                        <div class="chart" id="loveThings_one"></div>
+                    </div>
+                    <div class="limit">
+                        主标签：<select class="timeinput" id="type_3" onchange="changeSubKey()"></select>
+                        副标签：<select class="timeinput" id="type_4" onchange="update_loveThing_2()"></select>
+                    </div>
+                    <div class="field">
+                        <div class="chart" id="loveThings_two"></div>
+                        <div class="chart" id="loveThings_three"></div>
+                    </div>
+                </fieldset>
+
+                <!--标签树-->
+                <fieldset id="04">
+                    <legend align="center">可 用 标 签</legend>
+                    <div class="field" style="height:800px">
+                        <div class="tree" id="label_tree"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+
+    </body>
+</html>

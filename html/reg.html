@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>注册</title>
+        <link rel="stylesheet" type="text/css" href="../css/authorize.css">
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/reg.js" ></script>
+    </head>
+    <body>
+        <div class="dowebok1">
+            <div class="logo"></div>
+            <div class="form-item">
+                <input class="phoneNum" id="phoneNum" type="text" autocomplete="off" placeholder="手机号">
+                <p class="tip" id="phoneNumTip">请输入合法的手机号</p>
+            </div>
+            <div class="form-item">
+                <input class="nickName" id="nickName" type="text" autocomplete="off" placeholder="昵称">
+                <p class="tip" id="nameTip">请设置昵称</p>
+            </div>
+            <div class="form-item">
+                <input class="password" id="password_one" type="password" autocomplete="off" placeholder="设置密码">
+                <p class="tip" id="pwdTip_one">密码长度不得少于8位</p>
+            </div>
+            <div class="form-item">
+                <input class="password" id="password_two" type="password" autocomplete="off" placeholder="确认密码">
+                <p class="tip" id="pwdTip_two">两次输入的密码不匹配</p>
+            </div>
+            <div class="form-item">
+                <button id="regBtn" onclick="register()">注 册</button>
+            </div>
+            <div class="reg-bar">
+                <a class="reg" href="../index.html">返回登录</a>
+            </div>
+        </div>   
+    </body>
+</html>
